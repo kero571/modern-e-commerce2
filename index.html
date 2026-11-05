@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TEST — Try the Look</title>
+<meta name="description" content="TEST — six looks, styled head to toe.">
+<link rel="preload" as="image" href="images/look4.png" fetchpriority="high">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="home">
+<header class="hd">
+ <a class="logo" href="index.html">TEST</a>
+ <nav class="nav" id="nav"><a href="index.html" aria-current="page">Home</a><a href="about.html">About</a></nav>
+ <a class="bag" href="checkout.html" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 016 0"/></svg><b id="bagc" hidden></b></a>
+ <button class="burger" id="menu" aria-label="Menu" aria-expanded="false" aria-controls="nav"><i></i></button>
+</header>
+<main class="c">
+ <div class="trk" id="trk" tabindex="0" aria-label="Looks"></div>
+ <div class="meta"><small id="lk">&nbsp;</small><h2 id="name">&nbsp;</h2><span id="price">&nbsp;</span></div>
+ <div class="ctrl"><button id="prev" aria-label="Previous look">‹</button><span class="count" id="cur"></span><div class="bar"><i id="thumb"></i></div><span class="count" id="tot"></span><button id="next" aria-label="Next look">›</button></div>
+</main>
+<script src="js/common.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

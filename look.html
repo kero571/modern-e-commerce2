@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Look — TEST</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="hd">
+ <a class="logo" href="index.html">TEST</a>
+ <nav class="nav" id="nav"><a href="index.html">Home</a><a href="about.html">About</a></nav>
+ <a class="bag" href="checkout.html" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 016 0"/></svg><b id="bagc" hidden></b></a>
+ <button class="burger" id="menu" aria-label="Menu" aria-expanded="false" aria-controls="nav"><i></i></button>
+</header>
+<div class="lkw">
+ <section class="fig">
+  <div class="tit"><small id="lk"></small><h1 id="ln">&nbsp;</h1></div>
+  <a class="x" href="index.html" aria-label="Close">×</a>
+  <div class="box" id="box"></div>
+  <div class="hintb">Tap a dot to shop the piece</div>
+ </section>
+ <aside class="pnl" aria-label="In this look">
+  <div class="ph"><h2>In this look</h2><small>3 PIECES</small></div>
+  <ul class="pl" id="pl"></ul>
+  <div class="pf">
+   <div class="t"><div>Complete the look<small>Bundle all 3 and save 10%</small></div><div><s id="old"></s><strong id="new"></strong></div></div>
+   <button class="btn" id="full">Add full look to bag →</button>
+  </div>
+ </aside>
+</div>
+<script src="js/common.js"></script>
+<script src="js/look.js"></script>
+</body>
+</html>

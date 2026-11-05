@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkout — TEST</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="hd">
+ <a class="logo" href="index.html">TEST</a>
+ <nav class="nav" id="nav"><a href="index.html">Home</a><a href="about.html">About</a></nav>
+ <a class="bag" href="checkout.html" aria-label="Bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 016 0"/></svg><b id="bagc" hidden></b></a>
+ <button class="burger" id="menu" aria-label="Menu" aria-expanded="false" aria-controls="nav"><i></i></button>
+</header>
+<div class="wrap" id="page">
+ <h1>Checkout</h1>
+ <div class="co" id="co">
+  <form class="f" id="form" autocomplete="on">
+   <h2>Contact</h2>
+   <label class="w">Full name<input name="name" autocomplete="name" required minlength="3"></label>
+   <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+   <label>Phone<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required minlength="7"></label>
+   <h2>Shipping</h2>
+   <label class="w">Address<input name="address" autocomplete="street-address" required></label>
+   <label>City<input name="city" autocomplete="address-level2" required></label>
+   <label>Postal code<input name="zip" autocomplete="postal-code" inputmode="numeric"></label>
+   <h2>Payment</h2>
+   <div class="pay">
+    <label><input type="radio" name="pay" value="Cash on delivery" checked> Cash on delivery</label>
+    <label><input type="radio" name="pay" value="Card"> Card</label>
+   </div>
+   <button class="btn" type="submit" style="grid-column:1/-1;margin-top:8px">Place order</button>
+  </form>
+  <aside class="sum" aria-label="Order summary"><h2>Your bag</h2><div id="items"></div><div id="tots"></div></aside>
+ </div>
+</div>
+<footer class="ft">© TEST</footer>
+<script src="js/common.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

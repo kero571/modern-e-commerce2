@@ -13,7 +13,7 @@ var els=L.map(function(l,i){
   });
   trk.appendChild(d);return d;
 });
-function measure(){W=els[0].offsetWidth;pitch=W*(innerWidth<=700?.74:.95)}
+function measure(){W=els[0].offsetWidth;pitch=W*(innerWidth<=700?.6:.95)}
 /* بيضبط نسبة الصور من الصورة الحقيقية، فالكروت بتاخد أكبر مساحة ممكنة من غير ما الصورة تتصغّر */
 function setAR(r){
   if(!(r>.2&&r<3))return;

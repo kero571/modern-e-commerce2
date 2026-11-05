@@ -48,7 +48,7 @@ main.c{flex:1;display:flex;flex-direction:column;justify-content:center;min-heig
 .bar{width:min(240px,40vw);height:1px;background:#1d1b1844;position:relative}
 .bar i{position:absolute;top:-1px;height:3px;background:var(--ink);left:0;transition:left .4s}
 .count{font:11px monospace;min-width:2ch}
-@media(max-width:700px){main.c{--h:max(260px,min(calc(100dvh - var(--hh) - 175px),760px));--w:min(calc(var(--h)*var(--ar)),56vw)}.trk{height:calc(var(--w)/var(--ar))}.intro{max-width:80vw}.ctrl{gap:10px}}
+@media(max-width:700px){main.c{--h:max(260px,min(calc(100dvh - var(--hh) - 175px),760px));--w:min(calc(var(--h)*var(--ar)),50vw)}.trk{height:calc(var(--w)/var(--ar))}.intro{max-width:80vw}.ctrl{gap:10px}}
 @media(max-height:560px){.intro p{display:none}main.c{--h:max(200px,calc(100dvh - var(--hh) - 135px))}.meta{min-height:60px;margin-top:6px}}
 
 /* look page */

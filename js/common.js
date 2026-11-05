@@ -27,14 +27,14 @@ function swatch(k,col){
   '<path d="M20 120 Q20 90 60 100 L110 112 Q170 120 180 140 V158 H20 Z" fill="'+col+'" stroke="#9998"/>';
   return '<svg viewBox="0 0 200 200" role="img">'+s+'</svg>';
 }
-/* Images: put files in /images. Extensions are tried in this order (first one that exists wins).
-   Missing file -> SVG placeholder. Names:
-   images/look1.png ... look6.png        full-body look photo (look N)
-   images/look1-p1.png (top), -p2 (bottom), -p3 (shoes)   piece photos for look 1 (same for the others) */
-var IMG_DIR='images/',IMG_EXT=['png','webp','jpg','jpeg'];
+/* Images: put .webp files in /images. Missing file -> SVG placeholder. Names:
+   images/look1.webp ... look6.webp        full-body look photo (look N)
+   images/look1-p1.webp (top), -p2 (bottom), -p3 (shoes)   piece photos for look 1 (same for the others) */
+var IMG_DIR='images/',IMG_EXT=['webp'];
+/* eager: true = تحميل بأولوية عالية، 1 = تحميل فوري من غير أولوية، false/undefined = lazy */
 function mk(base,alt,w,h,eager,fb,done){
   var im=new Image(),n=0;im.width=w;im.height=h;im.alt=alt;im.draggable=false;im.decoding='async';
-  if(eager)im.fetchPriority='high';else im.loading='lazy';
+  if(eager===true)im.fetchPriority='high';else if(eager!==1)im.loading='lazy';
   /* done(ratio): بيرجع نسبة عرض/ارتفاع الصورة الحقيقية (أو 9/16 لو الصورة مش موجودة) */
   im.addEventListener('load',function(){if(done&&im.naturalHeight)done(im.naturalWidth/im.naturalHeight)});
   im.addEventListener('error',function(){

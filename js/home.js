@@ -1,11 +1,11 @@
 var trk=$('trk'),N=L.length,START=Math.floor(N/2),pos=START,vel=0,snapTo=null,raf=0,mode='idle',active=-1;
 var W=0,pitch=0,gl=1,moved=0,drag=null,t0=0,imgs=[];
-var DUR=2000,D=N*1.5;                       /* intro: length (ms) and distance (items) */
+var DUR=1800,D=N;                           /* intro: length (ms) and distance (items). D لازم يكون من مضاعفات N عشان نفس الصورة تبدأ في النص */
 var meta=document.querySelector('.meta'),ctrl=document.querySelector('.ctrl');
 var wrap=function(x){x=((x%N)+N)%N;return x>N/2?x-N:x};
 var els=L.map(function(l,i){
   var d=document.createElement('div');d.className='it';d.setAttribute('role','button');d.setAttribute('aria-label',l.n);
-  var im=lookImg(i,true,i===START?setAR:null);imgs.push(im);d.appendChild(im);
+  var im=lookImg(i,i===START?true:1,i===START?setAR:null);imgs.push(im);d.appendChild(im);
   d.addEventListener('click',function(){
     if(moved>6||mode==='intro')return;
     var r=Math.round(pos),k=wrap(i-r);
@@ -13,12 +13,12 @@ var els=L.map(function(l,i){
   });
   trk.appendChild(d);return d;
 });
-function measure(){W=els[0].offsetWidth;pitch=W*.95}
+function measure(){W=els[0].offsetWidth;pitch=W*(innerWidth<=700?.74:.95)}
 /* بيضبط نسبة الصور من الصورة الحقيقية، فالكروت بتاخد أكبر مساحة ممكنة من غير ما الصورة تتصغّر */
 function setAR(r){
   if(!(r>.2&&r<3))return;
   document.querySelector('main.c').style.setProperty('--ar',r.toFixed(4));
-  measure();if(mode!=='intro')render();
+  measure();render();
 }
 /* sharp in the middle, soft + smaller on the sides; endless (wraps around) */
 function render(){
@@ -29,7 +29,6 @@ function render(){
     e.style.transform='translate3d(calc(-50% + '+(d*pitch).toFixed(1)+'px),0,0) scale('+sc.toFixed(3)+')';
     e.style.opacity=o.toFixed(2);
     e.style.visibility=o<.01?'hidden':'visible';
-    e.style.filter=a<.15?'none':'blur('+Math.min(a*1.6,3).toFixed(1)+'px)';
     e.style.zIndex=Math.round(100-a*20);
   }
   var r=((Math.round(pos)%N)+N)%N;
@@ -49,7 +48,6 @@ function loop(now){
   if(mode==='intro'){
     var t=Math.min((now-t0)/DUR,1);
     pos=START+D*Math.pow(1-t,4);                 /* fast, then slows smoothly to a stop */
-    gl=Math.min(1,(now-t0)/300);
     if(t<1){render();raf=requestAnimationFrame(loop);return}
     mode='idle';pos=START;gl=1;raf=0;render();showUI();return;
   }
@@ -96,14 +94,18 @@ function endDrag(e){
 }
 addEventListener('pointerup',endDrag);addEventListener('pointercancel',endDrag);
 function showUI(){meta.style.opacity=ctrl.style.opacity=1;active=-1;render()}
-if(window.ResizeObserver)new ResizeObserver(function(){measure();if(mode!=='intro')render()}).observe(trk);
-else addEventListener('resize',function(){measure();if(mode!=='intro')render()});
+if(window.ResizeObserver)new ResizeObserver(function(){measure();render()}).observe(trk);
+else addEventListener('resize',function(){measure();render()});
 measure();
-if(matchMedia('(prefers-reduced-motion:reduce)').matches){render();showUI()}
+if(matchMedia('(prefers-reduced-motion:reduce)').matches){mode='idle';pos=START;render();showUI()}
 else{
+  mode='intro';pos=START+D;                 /* نفس صورة النص، والتفاعل متقفل لحد ما الأنيميشن يخلص */
   meta.style.opacity=ctrl.style.opacity=0;
+  render();                                 /* أول رسمة: الصور ظاهرة فورًا وصورة واحدة في النص */
   var ready=Promise.all(imgs.map(function(im){return im.decode?im.decode().catch(function(){}):0}));
-  Promise.race([ready,new Promise(function(r){setTimeout(r,900)})]).then(function(){
-    mode='intro';pos=START+D;gl=0;t0=performance.now();last=t0;raf=requestAnimationFrame(loop);
+  Promise.race([ready,new Promise(function(r){setTimeout(r,3000)})]).then(function(){
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      t0=performance.now();last=t0;raf=requestAnimationFrame(loop);
+    })});
   });
 }
